@@ -36,7 +36,8 @@
 | **V1** | https://github.com/ZTNIAN/dramatica-flow-enhanced | 12个增强点完成但有6项"写了没接入" |
 | **V2** | https://github.com/ZTNIAN/dramatica-flow-enhanced-v2 | 修复V1的核心问题 + 知识库扩充 |
 | **V3** | https://github.com/ZTNIAN/dramatica-flow-enhanced-v3 | 全面升级：知识库+Web界面+动态规划+KB追踪 |
-| **V4（当前）** | https://github.com/ZTNIAN/dramatica-flow-enhanced-v4 | 架构重构：模块化+配置化+安全加固+异步化 |
+| **V4** | https://github.com/ZTNIAN/dramatica-flow-enhanced-v4 | 架构重构：模块化+配置化+安全加固+异步化 |
+| **V5（当前）** | https://github.com/ZTNIAN/dramatica-flow-enhanced-v5 | 多LLM+选择性审查+WebSocket+Agent画像可视化 |
 
 ### 本地部署位置
 
@@ -101,7 +102,23 @@ cd dramatica-flow-enhanced-v4
 - LLM端点同步阻塞
 - 错误处理全是裸 `except Exception`
 
-### V4 做了什么
+
+### V5 做了什么
+
+V5 从 V4 出发，实现了 7 项优化：
+
+| 改动 | 文件 | 效果 |
+|------|------|------|
+| 多LLM后端 | `core/llm/__init__.py` | 新增 Claude + GPT-4 Provider + 自动降级链 |
+| 选择性审查 | `core/pipeline.py` | 4种模式：all/light/minimal/adaptive |
+| WebSocket进度 | `core/server/__init__.py` | `/ws/progress/{book_id}` 实时推送 |
+| Agent画像 | `core/server/routers/enhanced.py` | agent-performance + review-stats 端点 |
+| .env更新 | `.env.example` | Claude/GPT-4/WebSocket/review mode 变量 |
+| Web UI | `dramatica_flow_web_ui.html` | WebSocket客户端 + Agent画像Tab |
+| 交接文档 | `PROJECT_HANDOFF.md` | 更新为V5 |
+
+### V4 历史（供参考）
+
 
 **V4 = V3 + 全面架构重构（12项优化）**
 
@@ -529,7 +546,7 @@ with open("core/pipeline.py", "r") as f:
 
 ---
 
-## 七、V4 是怎么迭代的
+## 七、V5 是怎么迭代的（V4 历史见下方）
 
 ### 迭代过程
 
